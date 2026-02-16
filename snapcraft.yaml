@@ -30,6 +30,7 @@ apps:
     environment:
       GST_PLUGIN_PATH: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gstreamer-1.0
       LD_LIBRARY_PATH: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/blas:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lapack:$LD_LIBRARY_PATH
+    command-chain: [default_configure.sh]
     command: usr/bin/uxplay
 
 parts:
@@ -71,3 +72,11 @@ parts:
       - -usr/share/doc
       - -usr/share/icons
       - -usr/share/locale
+
+
+  setup:
+    plugin: dump
+    source: bin
+    override-build: |
+      chmod 755 $CRAFT_PART_BUILD/default_configure.sh # Try to give permission to execute
+      craftctl default
