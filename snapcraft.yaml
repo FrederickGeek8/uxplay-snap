@@ -46,7 +46,7 @@ parts:
       - -DNO_MARCH_NATIVE=ON
     override-pull: |
       craftctl default
-      craftctl set version=$(git describe --abbrev=0 --tags | tr -d 'v')
+      craftctl set version="$(git describe --abbrev=0 --tags | tr -d 'v')-custom"
     build-packages:
       # - cmake
       # - ninja-build
